@@ -49,7 +49,7 @@
 #include <dt-bindings/pinctrl/sun4i-a10.h>
 
 / {
-	compatible = "nextthing,chip", "allwinner,sun5i-r8";
+	compatible = "nextthing,chip";
 
 	/* Pinctrl changes */
 	fragment@0 {
@@ -57,10 +57,9 @@
 
 		__overlay__ {
 			chip_bl_en: chip_backlight_enable@0 {
-				allwinner,pins = "PD18";
-				allwinner,function = "gpio_out";
-				allwinner,drive = <SUN4I_PINCTRL_10_MA>;
-				allwinner,pull = <SUN4I_PINCTRL_NO_PULL>;
+				pins = "PD18";
+				function = "gpio_out";
+				drive-strength = <10>;
 			};
 		};
 	};
@@ -71,7 +70,7 @@
 
 		__overlay__ {
 			pinctrl-names = "default";
-			pinctrl-0 = <&pwm0_pins>;
+			pinctrl-0 = <&pwm0_pin>;
 			status = "okay";
 		};
 	};
@@ -102,8 +101,6 @@
 		__overlay__ {
 			#address-cells = <1>;
 			#size-cells = <0>;
-			pinctrl-names = "default";
-			pinctrl-0 = <&i2c1_pins_a>;
 			status = "okay";
 
 			keyboard: keyboard@34 {
@@ -182,7 +179,7 @@
 
 	/* PocketCHIP LED definition */
 	fragment@8 {
-		target = <&leds_status>;
+		target-path = "/leds/led-0";
 
 		__overlay__ {
 			linux,default-trigger = "default-on";
